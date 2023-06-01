@@ -109,6 +109,7 @@ if user_data:
         print(f"Total repos: {user_repo_stats['repo_count']}")
         print(f"Total stargazers: {user_repo_stats['stargazer_count']}")
         print(f"Total forks: {user_repo_stats['fork_count']}")
+        print(f"Total repos without forks: {user_repo_stats['repo_count'] - user_repo_stats['fork_count']}")
 
         #repo size (rounded to two decimals)
         avg_repo_size = user_repo_stats['avg_repo_size']
