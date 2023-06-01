@@ -1,24 +1,24 @@
 import requests
 from dotenv import dotenv_values
-from flask import Flask, render_template, request
+# from flask import Flask, render_template, request
 
-app = Flask(__name__)
+# app = Flask(__name__)
 token = dotenv_values('.env')
 
 #route to retrieve information as well as send updated info for processing
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        username = request.form['username']
-        user_data = github_username(username)
-        #call the repo stats function and return the information as a template for the stats.html page if user_data is valid. Return an error if the user data is not found
-        if user_data:
-            user_repo_stats = github_user_repo_stats(username)
-            return render_template('stats.html', user_data = user_data, user_repo_stats = user_repo_stats)
-        else:
-            return render_template('error.html', msg="This user was not found.")
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         user_data = github_username(username)
+#         #call the repo stats function and return the information as a template for the stats.html page if user_data is valid. Return an error if the user data is not found
+#         if user_data:
+#             user_repo_stats = github_user_repo_stats(username)
+#             return render_template('stats.html', user_data = user_data, user_repo_stats = user_repo_stats)
+#         else:
+#             return render_template('error.html', msg="This user was not found.")
         
-    return render_template('index.html')
+#     return render_template('index.html')
 
 #denote with f strings for convienence
 def github_username(username):
@@ -125,7 +125,9 @@ if user_data:
         elif avg_repo_size >= 1024:
             avg_repo_size = f"{avg_repo_size / 1024:.2f} KB"
 
-        #could have added an else statement here to where I just return it as bytes if it's smaller than a kilobyte
+        #<KB
+        else:
+            avg_repo_size = f"{avg_repo_size:.2f} bytes"
 
         print(f"Average repo size: {avg_repo_size}")
 
@@ -135,5 +137,5 @@ if user_data:
 
      
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
